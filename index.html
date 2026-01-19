@@ -1,309 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيق Work Law</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مستشارك القانوني - قانون العمل المصري</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            padding: 30px 25px;
-            margin: 20px auto;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* شعار ميزان العدل */
-        .logo-container {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        .scales {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .beam {
-            width: 100px;
-            height: 8px;
-            background-color: #333;
-            border-radius: 4px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .stand {
-            width: 10px;
-            height: 60px;
-            background-color: #333;
-            position: absolute;
-            top: 30px;
-            left: calc(50% - 5px);
-            z-index: 1;
-        }
-        
-        .base {
-            width: 50px;
-            height: 10px;
-            background-color: #333;
-            border-radius: 3px;
-            position: absolute;
-            top: 90px;
-            left: calc(50% - 25px);
-        }
-        
-        .left-pan, .right-pan {
-            width: 45px;
-            height: 20px;
-            background-color: #1a237e;
-            border-radius: 10px 10px 0 0;
-            position: absolute;
-            top: 40px;
-        }
-        
-        .left-pan {
-            left: 0;
-            transform: translateX(-50%);
-        }
-        
-        .right-pan {
-            right: 0;
-            transform: translateX(50%);
-        }
-        
-        .left-weight, .right-weight {
-            width: 30px;
-            height: 30px;
-            background-color: #ff9800;
-            border-radius: 50%;
-            position: absolute;
-            top: 65px;
-        }
-        
-        .left-weight {
-            left: 0;
-            transform: translateX(-50%);
-        }
-        
-        .right-weight {
-            right: 0;
-            transform: translateX(50%);
-        }
-        
-        /* النصوص والعنوان */
-        h1 {
-            color: #1a237e;
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .subtitle {
-            color: #5c6bc0;
-            font-size: 18px;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-        
-        .description {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            font-size: 16px;
-            padding: 0 10px;
-        }
-        
-        /* زر فتح التطبيق */
-        .app-button {
-            display: block;
-            width: 100%;
-            max-width: 320px;
-            margin: 0 auto 30px;
-            background: linear-gradient(to right, #1a237e, #3949ab);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            padding: 18px 25px;
-            font-size: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(26, 35, 126, 0.3);
-            text-decoration: none;
-        }
-        
-        .app-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(26, 35, 126, 0.4);
-            background: linear-gradient(to right, #283593, #5c6bc0);
-        }
-        
-        .app-button:active {
-            transform: translateY(1px);
-        }
-        
-        .app-button i {
-            margin-left: 10px;
-            font-size: 22px;
-        }
-        
-        /* تذييل الصفحة */
-        footer {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            margin-top: 20px;
-            max-width: 500px;
-            padding: 0 20px;
-        }
-        
-        /* تأثيرات للشعار */
-        @keyframes balance {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(2deg); }
-            75% { transform: rotate(-2deg); }
-        }
-        
-        .scales {
-            animation: balance 3s infinite ease-in-out;
-        }
-        
-        /* تصميم متجاوب */
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-                border-radius: 20px;
-            }
-            
-            h1 {
-                font-size: 28px;
-            }
-            
-            .subtitle {
-                font-size: 16px;
-            }
-            
-            .description {
-                font-size: 15px;
-            }
-            
-            .app-button {
-                font-size: 18px;
-                padding: 16px 20px;
-            }
-            
-            .scales {
-                width: 100px;
-                height: 100px;
-            }
-        }
-        
-        @media (max-width: 350px) {
-            h1 {
-                font-size: 24px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-            }
-        }
+      :root {
+        --legal-emerald: #064e3b;
+        --legal-gold: #b45309;
+      }
+      body {
+        font-family: 'Cairo', sans-serif;
+        background: radial-gradient(circle at top right, #f1f5f9, #e2e8f0);
+        color: #1e293b;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-size: 18px; /* القاعدة العامة */
+      }
+      .legal-font {
+        font-family: 'Amiri', serif;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      /* إجبار الحد الأدنى للخطوط المهمة */
+      p, span, button, input, select, li {
+        font-weight: 700 !important;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #064e3b;
+        border-radius: 10px;
+      }
+      #root:empty::before {
+        content: 'جاري تحميل ميزان العدالة...';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-weight: 900;
+        font-size: 24px;
+        color: #064e3b;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="logo-container">
-            <div class="scales">
-                <div class="stand"></div>
-                <div class="beam"></div>
-                <div class="base"></div>
-                <div class="left-pan"></div>
-                <div class="right-pan"></div>
-                <div class="left-weight"></div>
-                <div class="right-weight"></div>
-            </div>
-        </div>
-        
-        <h1>Work Law</h1>
-        <p class="subtitle">تطبيق قانون العمل</p>
-        
-        <p class="description">
-            تطبيق Work Law يهدف إلى توعية العمال وأصحاب العمل بحقوقهم وواجباتهم وفقًا لقانون العمل. يوفر معلومات قانونية موثوقة وشاملة حول جميع الجوانب المتعلقة بقوانين العمل واللوائح التنفيذية.
-        </p>
-        
-        <a href="https://ai.studio/apps/drive/1hamQCsm7LSgS5JJ6hMOtUuxI810qqYco?fullscreenApplet=true" class="app-button" target="_blank">
-            <i class="fas fa-external-link-alt"></i>
-            افتح تطبيق Work Law
-        </a>
-        
-        <div class="instructions">
-            <p style="color: #666; font-size: 15px;">
-                انقر على الزر أعلاه لفتح التطبيق في وضع ملء الشاشة. تأكد من أن متصفحك يسمح بفتح النوافذ المنبثقة.
-            </p>
-        </div>
-    </div>
-    
-    <footer>
-        <p>© 2023 تطبيق Work Law. جميع الحقوق محفوظة.</p>
-        <p>معلومات قانونية موثوقة - خدمة مجانية للمجتمع</p>
-    </footer>
-
-    <script>
-        // إضافة تأثيرات تفاعلية
-        document.addEventListener('DOMContentLoaded', function() {
-            const button = document.querySelector('.app-button');
-            const scales = document.querySelector('.scales');
-            
-            // تأثير عند النقر على الزر
-            button.addEventListener('click', function(e) {
-                // يمكن إضافة أي كود إضافي هنا قبل فتح الرابط
-                console.log('فتح تطبيق Work Law...');
-            });
-            
-            // تأثير عند تمرير الماوس على الشعار
-            scales.addEventListener('mouseover', function() {
-                this.style.animationPlayState = 'paused';
-            });
-            
-            scales.addEventListener('mouseout', function() {
-                this.style.animationPlayState = 'running';
-            });
-            
-            // رسالة تأكيد عند الخروج من الصفحة بعد النقر على الزر
-            window.addEventListener('beforeunload', function(e) {
-                if (document.activeElement.classList.contains('app-button')) {
-                    // لا تفعل شيئاً، دع الرابط يفتح
-                }
-            });
-        });
-    </script>
-</body>
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0",
+    "react-dom": "https://esm.sh/react-dom@19.0.0",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+    "@google/genai": "https://esm.sh/@google/genai@1.3.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+  </body>
 </html>
